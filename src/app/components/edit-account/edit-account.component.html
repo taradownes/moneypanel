@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-md-6">
+      <a routerLink="/account/{{ id }}" class="btn btn-link"><i class="fa fa-arrow-circle-o-left"></i> Back to Account</a>
+    </div>
+    <div class="col-md-6">
+  
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      Edit Account
+    </div>
+    <div class="card-body">
+      <form #accountForm="ngForm" (ngSubmit)="onSubmit(accountForm)">
+        <div class="form-group">
+          <input 
+            type="text"
+            class="form-control"
+            name="account"
+            
+            #account="ngModel"
+            [ngClass]="{'is-invalid': account.errors && account.touched}"
+            [(ngModel)]="account.account"
+            minlength="2"
+            required
+          >
+          <div [hidden]="!account.errors?.required" class="invalid-feedback">
+              Account Name required
+          </div>
+          <div [hidden]="!account.errors?.minlength" class="invalid-feedback">
+            Account Name must be at least 2 characters long
+        </div>
+        </div>
+        <div class="form-group">
+          <input 
+            type="number"
+            class="form-control"
+            name="balance"
+            #balance="ngModel"
+            [(ngModel)]="account.balance"
+            [disabled]="disableBalanceOnEdit"
+          >
+       
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary btn-block">
+      </form>
+    </div>
+  </div>
